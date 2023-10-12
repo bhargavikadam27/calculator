@@ -1,10 +1,9 @@
 import tkinter as tk
 
-root = tk.Tk()  # Main box window
-root.title("Standard Calculator")  # Title shown at the title bar
-root.resizable(0, 0)  # disabling the resizeing of the window
+root = tk.Tk()  
+root.title("Standard Calculator")  
+root.resizable(0, 0)  
 
-# Creating an entry field:
 e = tk.Entry(root,
              width=35,
              bg='#f0ffff',
@@ -15,49 +14,49 @@ e = tk.Entry(root,
 e.grid(row=0, column=0, columnspan=3, padx=12, pady=12)
 
 
-def buttonClick(num):  # function for clicking
+def buttonClick(num):  
     temp = e.get(
-    )  # temporary varibale to store the current input in the screen
-    e.delete(0, tk.END)  # clearing the screen from index 0 to END
-    e.insert(0, temp + num)  # inserting the incoming number input
+    )  
+    e.delete(0, tk.END) 
+    e.insert(0, temp + num) 
 
 
-def buttonClear():  # function for clearing
+def buttonClear():  
     e.delete(0, tk.END)
 
 
 def buttonGet(
         oper
-):  # function for storing the first input and printing '+, -, /, *'
-    global num1, math  # global variable num1 and math to use in function buttonEqual()
-    num1 = e.get()  # getting first number
-    math = oper  # oper varaible is the type of operation being performed
+):  
+    global num1, math  
+    num1 = e.get() 
+    math = oper  
     e.insert(tk.END, math)
     try:
-        num1 = float(num1)  # converting the number to float type
-    except ValueError:  # in case there is a character other than numerals, clear the screen
+        num1 = float(num1)  
+    except ValueError:  
         buttonClear()
 
 
-def buttonEqual():  # function for printing the sum
-    inp = e.get()  # getting the inserted input
-    num2 = float(inp[inp.index(math) + 1:])  # getting the second number
+def buttonEqual():  
+    inp = e.get()  
+    num2 = float(inp[inp.index(math) + 1:])  
     e.delete(0, tk.END)
-    if math == '+':  # Addition
+    if math == '+':  
         e.insert(0, str(num1 + num2))
-    elif math == '-':  # Subtraction
+    elif math == '-':  
         e.insert(0, str(num1 - num2))
-    elif math == 'x':  # Multiplication
+    elif math == 'x':  
         e.insert(0, str(num1 * num2))
-    elif math == '/':  # Division
+    elif math == '/':  
         try:
             e.insert(0, str(num1 / num2))
         except ZeroDivisionError:
-            # in case there is a zero in the denominator, answer is undefined
+           
             e.insert(0, 'Undefined')
 
 
-# Defining Buttons:
+
 b1 = tk.Button(root,
                text='1',
                padx=40,
@@ -163,7 +162,7 @@ bequal = tk.Button(root,
                    command=buttonEqual,
                    font='Calibri 12')
 
-# Putting the buttons on the screen:
+
 b1.grid(row=3, column=0)
 b2.grid(row=3, column=1)
 b3.grid(row=3, column=2)
@@ -186,5 +185,4 @@ bsub.grid(row=4, column=3)
 
 bclear.grid(row=0, column=3)
 
-# Looping the window:
 root.mainloop()
